@@ -25,7 +25,6 @@ class AmazonCrawler(object):
 
 
     def item_search(self, **kwargs):
-        response = self.amazon.ItemSearch(ResponseGroup="ItemAttributes,SalesRank",**kwargs)
         pages = self._no_of_pages(response)
         max_pages = pages if pages < self.AMAZON_MAX_PAGES else self.AMAZON_MAX_PAGES
         for i in range(max_pages):
@@ -85,7 +84,7 @@ def csv_write_record(output_file="output.csv", row=[]):
     with open(output_file, 'a') as f:
         writer=csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
         writer.writerow(row)
-        
+
 import sys
 if __name__ == "__main__":
     authors = sys.argv[1:]
@@ -99,6 +98,6 @@ if __name__ == "__main__":
         for key in keys:
             row.append(', '.join(record[key]))
         csv_write_record(output_file="output.csv", row=row)
-        
-    
-    
+
+
+
